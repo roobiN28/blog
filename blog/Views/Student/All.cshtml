@@ -1,0 +1,45 @@
+﻿@model System.Collections.Generic.List<blog.Models.Student>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All</title>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                @foreach (var student in Model)
+            {
+                    <div class="col-sm-12">
+                        <div class="jumbotron">
+                            <div class="container">
+                                <h1>Nazwa : @student.StudentName</h1>
+                                <p>Data :@student.DateOfBirth</p>
+                                <p>Wzrost: @student.Height</p>
+                                <h2>
+                                    @if (student.Standard != null)
+                                    {
+                                        <text> Student:</text> @student.Standard.StandardName
+                                    }
+                                    else
+                                    {
+                                        <text> Nie ma standarów</text>
+                                    }
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
