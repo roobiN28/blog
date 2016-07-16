@@ -1,0 +1,62 @@
+﻿@model System.Collections.Generic.List<blog.entity.Post>
+
+
+@{
+    Layout = "../Shared/Template.cshtml";
+}
+
+<!DOCTYPE html>
+@if (Model.Count == 0)
+{
+    <p class="bg-danger"> Nie znaleziono postów </p>
+}
+@foreach (var post in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                @post.Title
+            </h4>
+        </div>
+        <div class="panel-body">
+            @Html.Raw(HttpUtility.HtmlDecode(post.Body))
+        </div>
+
+        <div class="panel-footer" style="text-align-last: right">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+                    @if (post.Comments != null)
+                    {
+                        foreach (var c in post.Comments)
+                        {
+                            <p class="alert-info">@c.Body</p>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+   
+                    @using (@Html.BeginForm("AddComment", "Post", FormMethod.Post))
+                    {
+
+                        <input name="PostId" id="PostId" value=@post.PostId type="hidden" />
+
+                        @Html.Label("Autor")
+                        @Html.Editor("Author")
+                        
+                        @Html.Label("Body")
+                        @Html.Editor("Body")
+
+                        <button class="btn btn-default" type="submit">Add Comment</button>
+                    }
+
+                    <br />
+                    <div align="right">@post.DateCreated @post.Author</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

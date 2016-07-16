@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using blog.entity;
 using blog.Models;
 
 namespace blog.Database
@@ -9,10 +10,18 @@ namespace blog.Database
     {
         public BlogContext() : base("BlogContext")
         {
-            
+//            CreateDatabaseIfNotExists
+//                DropCreateDatabaseAlways
+//                DropCreateDatabaseIfModelChanges
+            System.Data.Entity.Database.SetInitializer<BlogContext>(new DropCreateDatabaseIfModelChanges<BlogContext>());
+            //System.Data.Entity.Database.SetInitializer<BlogContext>(new DropCreateDatabaseAlways<BlogContext>());
+            //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseIfModelChanges<SchoolDBContext>());
+            //Database.SetInitializer<SchoolDBContext>(new SchoolDBInitializer());
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Standard> Standards { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
