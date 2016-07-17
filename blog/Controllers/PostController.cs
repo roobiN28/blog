@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using blog.Database;
 using blog.entity;
+using Microsoft.AspNet.Identity;
 
 namespace blog.Controllers
 {
@@ -35,6 +36,7 @@ namespace blog.Controllers
         {
             post.DateCreated = DateTime.Now;
             post.Body = post.Body.Replace("\r\n", "<br />");
+            post.Author = context.UserProfiles.Find(User.Identity.GetUserId());
             context.Posts.Add(post);
             context.SaveChanges();
             return RedirectToAction("Table");
@@ -46,6 +48,8 @@ namespace blog.Controllers
             var post = context.Posts.Find(PostId);
             c.AssignedPost = post;
             c.AddedTime = DateTime.Now;
+            c.Author = context.UserProfiles.Find(User.Identity.GetUserId());
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Table");

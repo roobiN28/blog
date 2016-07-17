@@ -18,7 +18,6 @@ namespace blog.entity
         public DateTime AddedTime { get; set; }
         public virtual Post AssignedPost { get; set; }
 
-        [Required]
         public virtual UserProfile Author { get; set; }
     }
 }
