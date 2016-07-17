@@ -1,0 +1,53 @@
+﻿@model blog.Models.UserProfile
+@{
+    Layout = null;
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Twój profil
+    </div>
+    <div class="panel-body">
+        @if (User.Identity.IsAuthenticated == false)
+        {
+            <p>
+                Nie jestes zalogowany.
+                <br/>
+                Zaloguj się.
+            </p>
+        }
+        else
+        {
+            if (@ViewBag.Edit == false)
+            {
+                <ul class="list-group">
+                    <li class="list-group-item">Jesteś zalogowany jako:@Model.Name</li>
+                </ul>
+                using (Html.BeginForm("StartEditing", "UserProfileManagment"))
+                {
+                    <text>zmieniam dane</text>
+              
+
+                    <button class="btn btn-default" type="submit">Zmień dane</button>
+                }
+            }
+
+            else
+            {
+                using (@Html.BeginForm("EditUserProfile", "UserProfileManagment"))
+                {
+                    @Html.HiddenFor(m => m.UserProfileId);
+                    @Html.HiddenFor(m => m.BestNumber);
+                    @Html.Hidden("returnUrl", @HttpContext.Current.Request.Url.AbsolutePath)
+
+                    @Html.LabelFor(m => m.Name, new {@class = "basic_input"})
+                    @Html.EditorFor(m => m.Name, new {@class = "form-control basic_input"})
+                    @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})
+
+                    <button class="btn btn-success"  type="submit">Dodaj</button>
+                }
+            }
+        }
+
+    </div>
+
+</div>

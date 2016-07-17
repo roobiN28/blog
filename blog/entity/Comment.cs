@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using blog.Models;
 
 namespace blog.entity
 {
@@ -10,18 +11,13 @@ namespace blog.entity
             
         }
 
-        public int CommentId { get; set; }
-
-        [Required]
-        public string Author { get; set; }
+        public int CommentId { get; set; }            
 
         [Required]
         public string Body { get; set; }
-
         public DateTime AddedTime { get; set; }
-
         public virtual Post AssignedPost { get; set; }
 
-
+        public virtual UserProfile Author { get; set; }
     }
 }

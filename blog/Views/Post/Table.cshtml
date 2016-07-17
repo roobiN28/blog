@@ -13,14 +13,20 @@
 @foreach (var post in Model)
 {
     <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
+@*        <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
                 @post.Title
             </h4>
-        </div>
+        </div>*@
         <div class="panel-body">
+            <h2 class="panel-title" align="center">
+                @post.Title
+            </h2>
             @Html.Raw(HttpUtility.HtmlDecode(post.Body))
         </div>
+        <p align="right">
+            <strong>@post.Author.Name</strong>
+        </p>
 
         <div class="panel-footer" style="text-align-last: right">
             <div class="row">
@@ -29,7 +35,11 @@
                     {
                         foreach (var c in post.Comments)
                         {
-                            <p class="alert-info">@c.Body</p>
+                            <p class="alert-info">
+                                @c.Body
+                                <br/>
+                                <p align="right">@c.Author.Name</p>
+                            </p>
                         }
                     }
                 </div>
@@ -37,23 +47,20 @@
 
             <div class="row">
                 <div class="col-md-12">
-   
+
                     @using (@Html.BeginForm("AddComment", "Post", FormMethod.Post))
                     {
+                        <input name="PostId" id="PostId" value=@post.PostId type="hidden"/>
 
-                        <input name="PostId" id="PostId" value=@post.PostId type="hidden" />
-
-                        @Html.Label("Autor")
-                        @Html.Editor("Author")
-                        
                         @Html.Label("Body")
                         @Html.Editor("Body")
+                        @Html.ValidationMessageFor(m => Model.FirstOrDefault().Comments.FirstOrDefault().Body)
 
                         <button class="btn btn-default" type="submit">Add Comment</button>
                     }
 
-                    <br />
-                    <div align="right">@post.DateCreated @post.Author</div>
+                    <br/>
+                    <div align="right">@post.DateCreated @post.Author.Name</div>
                 </div>
 
             </div>
