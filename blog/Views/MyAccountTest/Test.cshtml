@@ -1,0 +1,28 @@
+﻿@model blog.Models.UserProfile
+
+@{
+    ViewBag.Title = "Test";
+    Layout = "../Shared/Template.cshtml";
+}
+
+@if (User.Identity.IsAuthenticated == false)
+{
+    <p class="alert-warning">Nie jesteś zalogowany</p>
+}
+else
+{
+    <p class="alert-success">
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
+                <p>Jestes zalogowany jako: @User.Identity.Name</p>
+                <p>Autoryzacja jako: @User.Identity.AuthenticationType</p>
+                <p>Nazwa: @Model.Name </p>
+                <p>NUmber: @Model.UserProfileId</p>
+
+            </div>
+        </div>
+
+
+    </p>
+}
+
