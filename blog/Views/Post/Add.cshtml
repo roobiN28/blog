@@ -1,5 +1,4 @@
 ﻿@model blog.entity.Post
-
 @*@section scripts
 {
     @Styles.Render("~/Content/css")
@@ -18,14 +17,16 @@
 <div class="jumbotron">
     @using (Html.BeginForm("Add", "Post"))
     {
+
         <div class="form-group">
-            @Html.LabelFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
+            
+            @Html.LabelFor(m => m.Title, new {htmlAttributes = new {@class = "label label-success"}})
             <input class="form-control" id="Title" name="Title" type="text" value="">
-            @Html.ValidationMessageFor(m => m.Body, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(m => m.Title, "", new {@class = "text-danger"})
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Body, new {@class = "basic_input"})
-                @Html.TextAreaFor(m => m.Body, new {@class = "form-control basic_input"})
+                @Html.LabelFor(m => m.Body)
+                <input name="Body" class="form-control basic_input"/>
                 @Html.ValidationMessageFor(m => m.Body, "", new {@class = "text-danger"})
             </div>
 
