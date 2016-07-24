@@ -18,8 +18,6 @@ namespace blog.Database
             //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseIfModelChanges<SchoolDBContext>());
             //Database.SetInitializer<SchoolDBContext>(new SchoolDBInitializer());
         }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Standard> Standards { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }

@@ -39,6 +39,7 @@
                     @Html.HiddenFor(m => m.BestNumber);
                     @Html.Hidden("returnUrl", @HttpContext.Current.Request.Url.AbsolutePath)
 
+
                     @Html.LabelFor(m => m.Name, new {@class = "basic_input"})
                     @Html.EditorFor(m => m.Name, new {@class = "form-control basic_input"})
                     @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})

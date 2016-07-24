@@ -15,7 +15,6 @@ namespace blog.Controllers
 
 
         BlogContext context = new BlogContext();
-        private List<Post> posts;
 
         public ActionResult Table()
         {
@@ -29,12 +28,6 @@ namespace blog.Controllers
             return View();
         }
 
-        public ActionResult Test()
-        {
-            Roles.CreateRole("admin");
-            Roles.CreateRole("user");
-            return View();
-        }
 
         [Authorize]
         [HttpPost]

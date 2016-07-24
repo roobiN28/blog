@@ -19,39 +19,10 @@ namespace blog.Controllers
     {
 
         BlogContext context = new BlogContext();
-        // GET: MyAccountTest
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Test()
-        {
-            var userId = User.Identity.GetUserId();
-
-            var userProfile = context.UserProfiles.Find(User.Identity.GetUserId());
-            if (userProfile == null)
-            {
-
-                
-                userProfile = new UserProfile(User.Identity.GetUserId());
-                context.UserProfiles.Add(userProfile);
-                context.SaveChanges();
-            }
-            userProfile.Name = "Baranek";
-            userProfile.BestNumber = 28;
-
-            context.UserProfiles.AddOrUpdate(userProfile);
-            context.SaveChanges();
 
 
 
-
-            return View(userProfile);
-            
-        }
-
-        public ActionResult UserProfileManagment(bool isEditing = false , string returnUrl = "/Post/Table")
+        public ActionResult UserProfileManagment(bool isEditing = false)
         {
             var userProfile = context.UserProfiles.Find(User.Identity.GetUserId());
             if (userProfile == null)
@@ -66,7 +37,8 @@ namespace blog.Controllers
 
         }
 
-        public ActionResult EditUserProfile(UserProfile user, string returnUrl = "/Post/Table")
+
+        public ActionResult EditUserProfile(UserProfile user, string returnUrl = "/")
         {
 
             context.UserProfiles.AddOrUpdate(user);
@@ -76,7 +48,8 @@ namespace blog.Controllers
             return Redirect(returnUrl);
         }
 
-        public ActionResult StartEditing(string returnUrl = "/Post/Table")
+
+        public ActionResult StartEditing(string returnUrl = "/")
         {
             Session["isEditing"] = true;
             return Redirect(returnUrl);
