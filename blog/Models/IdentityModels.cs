@@ -26,7 +26,7 @@ namespace blog.Models
         public ApplicationDbContext()
             : base("BlogContext", throwIfV1Schema: false)
         {
-            System.Data.Entity.Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            System.Data.Entity.Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
         }
 
         public static ApplicationDbContext Create()
